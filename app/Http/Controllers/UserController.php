@@ -29,4 +29,18 @@ class UserController extends Controller
         DB::table("users")->where('id', $id)->delete();
         return redirect()->route('user#index')->with('success','delete success');
     }
+    public function edit($id){
+        $user = DB::table('users')->where('id',$id)->first();
+        return view('edit',compact('user'));
+    }
+    public function update(Request $request, $id){
+        DB::table('users')->where('id',$id)->update([
+            "name" => $request->txtname,
+            "email" => $request->txtemail,
+            "phone" => $request->txtphone,
+        ]);
+
+        return redirect()->route('user#index')->with('success','update user data success');
+
+    }
 }
