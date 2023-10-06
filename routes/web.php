@@ -19,3 +19,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/',[UserController::class,'index'])->name('user#index');
+Route::post('store',[UserController::class,'store'])->name('user#store');
+Route::get('delete/{id}',[UserController::class,'delete'])->name('user#delete');

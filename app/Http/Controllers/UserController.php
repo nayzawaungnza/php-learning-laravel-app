@@ -13,4 +13,20 @@ class UserController extends Controller
             'users' => $users
         ]);
     }
+
+    public function store(Request $request){
+        //dd($request->all());
+        DB::table("users")->insert([
+            "name" => $request->txtname,
+            "email" => $request->txtemail,
+            "phone" => $request->txtphone,
+        ]);
+        return redirect()->route('user#index')->with('success','store user data success');
+
+    }
+
+    public function delete($id){
+        DB::table("users")->where('id', $id)->delete();
+        return redirect()->route('user#index')->with('success','delete success');
+    }
 }
